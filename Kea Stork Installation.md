@@ -18,6 +18,7 @@ Start by installing the things:
 
 **Notes:**
 - Curl scripts are provided by Cloudsmith and automatically add the repos to /etc/apt/sources.d
+- This installs the lastes dev version, if you want something specifc look up the repo (provided below) and install whatever package you want.
 - Kea is systemctl enabled and started on install, Stork is not. This is pending the DB setup.
 - For installing the repo make sure to install isc-* so it will use the newly added repo and the default Debian package.
 
@@ -43,6 +44,23 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 3. Start Stork ```systemctl start isc-stork-server```
 4. Check to see if you messed up ```systemctl status isc-stork-server```
 5. the site can be found at YOUR_IP_HERE:8080. Default Username and password is admin/admin
+
+## Install and Setup Stork Agent
+I though this was done until I opened up stork and realized I couldnt configure anything. So here is more stuff.
+
+1. Install the stork agent ```apt install isc-stork-agent```
+2. Enable the service ```systemctl enable isc-stork-agent.service```
+3. configure the stork agent by running this command and following the prompts.
+```su stork-agent -s /bin/sh -c 'stork-agent register --server-url http://127.0.0.1:8080'```
+  - For this prompt ```Enter the Stork server access token (optional):``` you can get the key from the stork server by clicking on the "How to Install Agent on New Machine". It says optional. I configured it with the key provided.
+  - For this prompt ```Enter port number that Stork Agent will listen on [8080]:``` enter ```8081```. This didnt actually change the port for me, so I had to do it manually my self.
+3. (IF NEEDED) modify the service to use the correct port because the script didnt work. ```nano /lib/systemd/system/isc-stork-agent.service``` and add ```--port=8081``` to the ExecStart line like so ```ExecStart=/usr/bin/stork-agent --port=8081```
+4. If you modified the service reload the daemon and restart the service
+```
+systemctl daemon-reload
+systemctl restart isc-stork-agent.service
+qsystemctl status isc-stork-agent.service
+```
 
 ## Notes
 - Stork Server does not read the /etc/stork/server.env by default when calling the binary directly (not using systemd). 
