@@ -44,7 +44,7 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 4. Check to see if you messed up ```systemctl status isc-stork-server```
 5. the site can be found at YOUR_IP_HERE:8080. Default Username and password is admin/admin
 
-##Notes
+## Notes
 - Stork Server does not read the /etc/stork/server.env by default when calling the binary directly (not using systemd). 
 -	Obviously modify the script with command with sudo if using a non-root user
 - Kea Services
