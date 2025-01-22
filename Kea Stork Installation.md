@@ -1,5 +1,5 @@
 # How to install Kea and Stork on Linux
-I really disliked the documentation for installing Kea and Stork. This is what I did to install it on a proxmox lxc container. 
+I really disliked the documentation for installing Kea and Stork. This is what I did to install it on a Proxmox LXC container. 
 
 ## Software installation as root in container
 Start by installing the things:
@@ -17,9 +17,9 @@ Start by installing the things:
 ```systemctl enable isc-stork-server```
 
 **Notes:**
-- Curl scripts are provided by cloudsmith and automatically add the repos to /etc/apt/sources.d
+- Curl scripts are provided by Cloudsmith and automatically add the repos to /etc/apt/sources.d
 - Kea is systemctl enabled and started on install, Stork is not. This is pending the DB setup.
-- For instlaling the repo make sure to install isc-* so it will use the newly added repo and the default debian package.
+- For installing the repo make sure to install isc-* so it will use the newly added repo and the default Debian package.
 
 ## Change to user postgres to set db password and create db
 1. Change to postgres user ```su - postgres```
@@ -39,7 +39,7 @@ STORK_DATABASE_USER_NAME=postgres
 STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_YOU_MAY_NOTICE_THIS_AND_CHANGE_IT._YOU_IDIOT
 ```
 3. Start Stork ```systemctl start isc-stork-server```
-4. Chceck to see if you messed up ```systemctl status isc-stork-server```
+4. Check to see if you messed up ```systemctl status isc-stork-server```
 5. the site can be found at YOUR_IP_HERE:8080. Default Username and password is admin/admin
 
 ##Notes
@@ -59,7 +59,7 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 - [Kea Cloudsmith Repo](https://cloudsmith.io/~isc/repos/kea-dev/packages/)
 
 ### Proxmox container settings
-NOTE: IF you have the FW enabled make sure you allow the required traffic to pass or crap wont work.
+NOTE: IF you have the FW enabled make sure you allow the required traffic to pass or crap won’t work.
 ```
 arch: amd64
 cores: 2
