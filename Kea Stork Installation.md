@@ -39,6 +39,7 @@ STORK_DATABASE_NAME=stork
 STORK_DATABASE_USER_NAME=postgres
 STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_YOU_MAY_NOTICE_THIS_AND_CHANGE_IT._YOU_IDIOT
 ```
+ - Make sure to remove or comment out the existing line in the config for ```STORK_DATABASE_PASSWORD=```
 3. Start Stork ```systemctl start isc-stork-server```
 4. Check to see if you messed up ```systemctl status isc-stork-server```
 5. the site can be found at YOUR_IP_HERE:8080. Default Username and password is admin/admin
