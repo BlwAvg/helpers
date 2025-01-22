@@ -56,7 +56,8 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 - [Kea Documentation](https://kea.readthedocs.io/en/latest/)
 - [Kea Cloudsmith Repo](https://cloudsmith.io/~isc/repos/kea-dev/packages/)
 
-###Proxmox container settings
+### Proxmox container settings
+NOTE: IF you have the FW enabled make sure you allow the required traffic to pass or crap wont work.
 ```
 arch: amd64
 cores: 2
