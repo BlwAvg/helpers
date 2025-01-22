@@ -2,6 +2,8 @@
 I really disliked the documentation for installing Kea and Stork. This is what I did to install it on a proxmox lxc container. 
 
 ## Software installation as root in container
+Start by installing the things:
+
 ```apt update```
 
 ```apt install curl apt-transport-https ca-certificates gnupg postgresql```
