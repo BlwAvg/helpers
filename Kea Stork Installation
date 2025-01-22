@@ -11,6 +11,12 @@ curl -1sLf 'https://dl.cloudsmith.io/public/isc/kea-dev/cfg/setup/bash.deb.sh' |
 
 apt install isc-kea
 
+systemctl enable isc-kea-dhcp4
+systemctl enable isc-kea-dhcp6
+systemctl enable isc-kea-dhcp-ddns
+systemctl enable isc-kea-ctrl-agent
+systemctl enable isc-kea-admin
+systemctl enable isc-kea-hooks
 
 Stork
 # /etc/stork/server.env
@@ -27,6 +33,13 @@ systemctl status isc-stork-server
 
 Notes
 - Stork Server does not read the /etc/stork/server.env by default when calling the binary directly (not using systemd). 
+isc-kea-dhcp4 — Kea DHCPv4 server package
+isc-kea-dhcp6 — Kea DHCPv6 server package
+isc-kea-dhcp-ddns — Kea DHCP DDNS server
+isc-kea-ctrl-agent — Kea Control Agent for remote configuration
+isc-kea-admin — Kea database administration tools
+isc-kea-hooks — Kea open source DHCP hooks
+
 
 Links
 - https://stork.readthedocs.io/en/latest/install.html
