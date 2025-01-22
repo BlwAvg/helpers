@@ -1,3 +1,6 @@
+# How to install Kea and Stork on Linux
+I really disliked the documentation for installing Kea and Stork. This is what I did to install it on a proxmox lxc container. 
+
 ## Software installation as root in container
 ```apt update```
 
@@ -37,9 +40,8 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 4. Chceck to see if you messed up ```systemctl status isc-stork-server```
 5. the site can be found at YOUR_IP_HERE:8080. Default Username and password is admin/admin
 
-Notes
+##Notes
 - Stork Server does not read the /etc/stork/server.env by default when calling the binary directly (not using systemd). 
-
 - Kea Services
   - isc-kea-dhcp4 — Kea DHCPv4 server package
   - isc-kea-dhcp6 — Kea DHCPv6 server package
@@ -48,8 +50,24 @@ Notes
   - isc-kea-admin — Kea database administration tools
   - isc-kea-hooks — Kea open source DHCP hooks
 
-Links
+## Links
 - [Stork Documentation](https://stork.readthedocs.io/en/latest/install.html)
 - [Stork Cloudsmith Repo](https://cloudsmith.io/~isc/repos/stork/packages/)
 - [Kea Documentation](https://kea.readthedocs.io/en/latest/)
 - [Kea Cloudsmith Repo](https://cloudsmith.io/~isc/repos/kea-dev/packages/)
+
+###Proxmox container settings
+```
+arch: amd64
+cores: 2
+features: nesting=1
+hostname: dhcp
+memory: 2048
+nameserver: CONTAINER_HOSTNAME_HERE
+net0: name=eth0,bridge=BRIDGE_HERE,firewall=1,gw=CONTAINER_GW_HERE,hwaddr=BL:AH:BL:AH:BL:AH,ip=CONTAINER_IP_HERE/SUBNET,type=veth
+ostype: debian
+rootfs: local-lvm:vm-110-disk-0,size=8G
+searchdomain: YOUR_SUPER_COOL_DOMAIN_HERE
+swap: 2048
+unprivileged: 1
+```
