@@ -25,8 +25,9 @@ Start by installing the things:
 1. Change to postgres user ```su - postgres```
 3. Launch postgres ```psql```
 4. Set the password for user postgres in the db ```ALTER USER postgres PASSWORD 'SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_YOU_MAY_NOTICE_THIS_AND_CHANGE_IT._YOU_IDIOT';``` then quit the db ```\q```
-5. After existing the database and at a bash prompt use the stork tool to create the db ```stork-tool db-create --db-name stork --db-user postgres --db-password SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_YOU_MAY_NOTICE_THIS_AND_CHANGE_IT._YOU_IDIOT```
-6. Got back to root ```exit```
+5. Dont forget to quit psql with ```\q```
+6. After existing the database and at a bash prompt use the stork tool to create the db ```stork-tool db-create --db-name stork --db-user postgres --db-password SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_YOU_MAY_NOTICE_THIS_AND_CHANGE_IT._YOU_IDIOT```
+7. Got back to root ```exit```
 
 ## Edit the Stork configuration and start Stork
 1. Nano is better than VI you poser ```nano /etc/stork/server.env```
