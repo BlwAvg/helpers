@@ -9,6 +9,9 @@ apt install -y postgresql-common
 Kea - Dev Repo
 curl -1sLf 'https://dl.cloudsmith.io/public/isc/kea-dev/cfg/setup/bash.deb.sh' | sudo bash
 
+apt install isc-kea
+
+
 Stork
 # /etc/stork/server.env
 curl -1sLf 'https://dl.cloudsmith.io/public/isc/stork/cfg/setup/bash.deb.sh' | sudo bash
