@@ -57,7 +57,7 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 - [Stork Documentation](https://stork.readthedocs.io/en/latest/install.html)
 - [Stork Cloudsmith Repo](https://cloudsmith.io/~isc/repos/stork/packages/)
 - [Kea Documentation](https://kea.readthedocs.io/en/latest/)
-- [Kea Cloudsmith Repo](https://cloudsmith.io/~isc/repos/kea-dev/packages/)
+- [Kea Dev Cloudsmith Repo](https://cloudsmith.io/~isc/repos/kea-dev/packages/)
 
 ### Proxmox container settings
 NOTE: IF you have the FW enabled make sure you allow the required traffic to pass or crap won’t work.
