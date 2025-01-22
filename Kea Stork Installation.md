@@ -44,6 +44,7 @@ STORK_DATABASE_PASSWORD=SUPER_SECRET_PASSWORD_HERE._IF_I_MAKE_THIS_LONG_ENOUGH_Y
 
 ##Notes
 - Stork Server does not read the /etc/stork/server.env by default when calling the binary directly (not using systemd). 
+-	Obviously modify the script with command with sudo if using a non-root user
 - Kea Services
   - isc-kea-dhcp4 — Kea DHCPv4 server package
   - isc-kea-dhcp6 — Kea DHCPv6 server package
