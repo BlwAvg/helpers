@@ -53,7 +53,7 @@ I though this was done until I opened up stork and realized I couldnt configure 
 3. configure the stork agent by running this command and following the prompts.
 ```su stork-agent -s /bin/sh -c 'stork-agent register --server-url http://127.0.0.1:8080'```
   - For this prompt ```Enter the Stork server access token (optional):``` you can get the key from the stork server by clicking on the "How to Install Agent on New Machine". It says optional. I configured it with the key provided.
-  - For this prompt ```Enter port number that Stork Agent will listen on [8080]:``` enter ```8081```. This didnt actually change the port for me, so I had to do it manually my self.
+  - For this prompt ```Enter port number that Stork Agent will listen on [8080]:``` enter ```8081```. This didnt actually change the port for me, so I had to do it manually my self. This only needs to be changes if the stork agent and server are on the same box. Or share the same port. If you changed the stork server port then your dont need to change this.
 3. (IF NEEDED) modify the service to use the correct port because the script didnt work. ```nano /lib/systemd/system/isc-stork-agent.service``` and add ```--port=8081``` to the ExecStart line like so ```ExecStart=/usr/bin/stork-agent --port=8081```
 4. If you modified the service reload the daemon and restart the service
 ```
