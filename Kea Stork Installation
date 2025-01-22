@@ -8,24 +8,16 @@ apt install -y postgresql-common
 
 Kea - Dev Repo
 curl -1sLf 'https://dl.cloudsmith.io/public/isc/kea-dev/cfg/setup/bash.deb.sh' | sudo bash
-
 apt install isc-kea
 
-systemctl enable isc-kea-dhcp4
-systemctl enable isc-kea-dhcp6
-systemctl enable isc-kea-dhcp-ddns
-systemctl enable isc-kea-ctrl-agent
-systemctl enable isc-kea-admin
-systemctl enable isc-kea-hooks
 
 Stork
 # /etc/stork/server.env
 curl -1sLf 'https://dl.cloudsmith.io/public/isc/stork/cfg/setup/bash.deb.sh' | sudo bash
+apt install isc-stork-server
 stork-tool db-create --db-name stork --db-user stork
 # This password needs to be copied into the server environment file or used in the stork-server command line, to configure the server to use this password while connecting to the database.
 
-# apt install isc-stork-server
-# This may not be needed.
 
 systemctl enable isc-stork-server
 systemctl start isc-stork-server
