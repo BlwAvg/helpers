@@ -1,3 +1,5 @@
+My DNS Provider did not provide integration with certbot. I found this method worked, but there was not a lot of documentation online. This was my process.
+
 ## Prerequisites
 - [ACME DNS Server](https://github.com/joohoi/acme-dns/releases)  
 - [ACME DNS Client](https://github.com/acme-dns/acme-dns-client/releases)  
