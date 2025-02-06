@@ -17,7 +17,7 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
     - `https://devicehunt.com/view/type/usb/vendor/046D`
 
-2. Stops the usb device
+2. Stop the usb device
     - `echo "" | tee /sys/kernel/config/usb_gadget/g0/UDC`
 
 3. Change the hid on the Nano KVM - MAKE UP YOUR OWN SERIAL NUMBER
