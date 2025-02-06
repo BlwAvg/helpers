@@ -36,6 +36,9 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
 5. This starts the USB device again.
    - `echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
 
+6. (Optional) While on the CLI I like to make some personal changes
+   - `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf`
+
 ## Default Settings
 ```
 # cat /sys/kernel/config/usb_gadget/g0/idVendor 
