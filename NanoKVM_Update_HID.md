@@ -14,13 +14,13 @@ This tool allows you to modify the HID (Human Interface Device) information of y
 
     - `echo 0x046D > /sys/kernel/config/usb_gadget/g0/idVendor`
 
-    - `echo 0xc054 > /sys/kernel/config/usb_gadget/g0/idProduct`
+    - `echo 0xb305 > /sys/kernel/config/usb_gadget/g0/idProduct`
 
     - `echo "***MAKE UP SERIAL NUMBER***" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber`
 
     - `echo "Logitech, Inc." > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer`
 
-    - `echo "Bluetooth mini-receiver" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product`
+    - `echo "BT Mini-Receiver" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product`
 
 5. This starts the USB device again.
    - `echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
