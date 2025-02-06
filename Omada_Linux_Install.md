@@ -1,3 +1,5 @@
+Omada was a pain to install. This is what I did to get it working.
+
 ## Networking
 
 To rename interfaces to something more straightforward (e.g., eth0, eth1, etc.) and enable a VLAN interface.
