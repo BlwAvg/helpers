@@ -1,8 +1,8 @@
 # NanoKVM HID Modifier
 
-This tool allows you to modify the HID (Human Interface Device) information of your NanoKVM's composite device.
+The built-in HID reset option can trigger Endpoint Detection and Response (EDR) systems. It appears that resetting the HID does not modify the **"USB Composite Device"** information, making it detectable by security systems.
 
-⚠️ **Warning:** Resetting the HID may trigger Endpoint Detection and Response (EDR) systems. However, altering this information can help bypass most EDR capabilities by making the device appear as a different or new HID.
+This tool allows you to modify the HID (Human Interface Device) information of your NanoKVM's composite device, helping to bypass EDR detection.
 
 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
     - `https://devicehunt.com/view/type/usb/vendor/046D`
