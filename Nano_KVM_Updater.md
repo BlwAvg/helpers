@@ -25,3 +25,30 @@ This tool allows you to modify the HID (Human Interface Device) information of y
 5. This starts the USB device again.
    - `echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
 
+## Default Settings
+```
+# cat /sys/kernel/config/usb_gadget/g0/idVendor 
+0x3346
+# cat /sys/kernel/config/usb_gadget/g0/idProduct 
+0x1009
+
+# cat /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber 
+0123456789ABCDEF
+# cat /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer 
+sipeed
+# cat /sys/kernel/config/usb_gadget/g0/strings/0x409/product 
+NanoKVM
+```
+
+**Restore Default Settings**
+
+`echo 0x3346 > /sys/kernel/config/usb_gadget/g0/idVendor`
+
+`echo 0x1009 > /sys/kernel/config/usb_gadget/g0/idProduct`
+
+
+`echo "0123456789ABCDEF" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber`
+
+`echo "sipeed" > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer`
+
+`echo "NanoKVM" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product`
