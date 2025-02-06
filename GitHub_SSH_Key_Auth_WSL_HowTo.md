@@ -1,3 +1,5 @@
+This repo provides straightforward instructions for setting up Git and GitHub authentication when working in both Windows Subsystem for Linux (WSL) and Git Bash. You’ll learn how to configure user credentials, generate and manage SSH keys, enable the SSH agent at startup, and troubleshoot common issues—all in one place. By following these steps, you can ensure a smooth and consistent Git workflow across your Windows and WSL environments.
+
 # Setup Github
 Setup Github under WSL
 
