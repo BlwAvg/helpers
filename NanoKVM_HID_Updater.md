@@ -15,7 +15,7 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
 
 **NOTE:** These changes are lost on boot. Check the boot section for updating /etc/init.d/S03usbdev
 
-### 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
+### 1. Determine Alternative HID IDs you want to use
 Use [DeviceHunt.com](https://devicehunt.com/view/type/usb/vendor/046D). This link defaults to Logitech, but uses whatever you want.
 
 ### 2. Stop the usb device
