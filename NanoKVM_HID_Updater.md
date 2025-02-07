@@ -41,7 +41,7 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
    - Change the root password `passwd`
 
 ## Boot update - /etc/init.d
-The files which updates the USB Composite HID is /etc/init.d/S03usbdev. Just update the section show below with whatever values you would have above. Note there is a duplicate of this section above that is commented out `#` This section can be safetly ignored.
+The files which updates the USB Composite HID is /etc/init.d/S03usbdev. Use Vi to update the section show below with whatever values you would have above. Note there is a duplicate of this section above that is commented out `#` This section can be safetly ignored.
 ```
     echo 0x3346 > idVendor
     echo 0x1009 > idProduct
