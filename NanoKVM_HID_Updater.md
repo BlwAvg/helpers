@@ -13,7 +13,7 @@ This project is intended for **educational purposes only**. The authors do not c
 This project is **not affiliated, associated, authorized, endorsed by, or in any way officially connected with Sipeed** or any of its subsidiaries or affiliates. All product and company names are trademarks of their respective holders.
 ************************************************************************************************************
 
-
+**NOTE:** These chhanges are lost on boot. Check the boot section for updating /etc/init.d/S03usbdev
 
 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
     - `https://devicehunt.com/view/type/usb/vendor/046D`
@@ -39,6 +39,17 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
 6. (Optional) While on the CLI I like to make some personal changes
    - Update the device to use local/preffered DNS `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf` 
    - Change the root password `passwd`
+
+## Boot update - /etc/init.d
+The files which updates the USB Composite HID is /etc/init.d/S03usbdev. Just update the section show below with whatever values you would have above. Note there is a duplicate of this section above that is commented out `#` This section can be safetly ignored.
+```
+    echo 0x3346 > idVendor
+    echo 0x1009 > idProduct
+    mkdir strings/0x409
+    echo '0123456789ABCDEF' > strings/0x409/serialnumber
+    echo 'sipeed' > strings/0x409/manufacturer
+    echo 'NanoKVM' > strings/0x409/product
+```
 
 ## Default Settings
 ```
