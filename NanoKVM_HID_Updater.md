@@ -15,28 +15,30 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
 
 **NOTE:** These changes are lost on boot. Check the boot section for updating /etc/init.d/S03usbdev
 
-1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
-    - `https://devicehunt.com/view/type/usb/vendor/046D`
+### 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
+Use [DeviceHunt.com](https://devicehunt.com/view/type/usb/vendor/046D). This link defaults to Logitech, but uses whatever you want.
 
-2. Stop the usb device
-    - `echo "" | tee /sys/kernel/config/usb_gadget/g0/UDC`
+### 2. Stop the usb device
+Run the following command to stop the USB device:
+```sh
+echo "" | tee /sys/kernel/config/usb_gadget/g0/UDC
+```
 
-3. Change the hid on the Nano KVM - MAKE UP YOUR OWN SERIAL NUMBER
+### 3. Change the hid on the Nano KVM
+NOTE ⚠ Make up your own serial number before running these commands.
+```sh
+echo 0x046D > /sys/kernel/config/usb_gadget/g0/idVendor
+echo 0xb305 > /sys/kernel/config/usb_gadget/g0/idProduct
+echo "***MAKE UP SERIAL NUMBER***" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber
+echo "Logitech, Inc." > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer
+echo "BT Mini-Receiver" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product
+```
+### 4. Restart the USB device.
+```sh
+echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
+```
 
-    - `echo 0x046D > /sys/kernel/config/usb_gadget/g0/idVendor`
-
-    - `echo 0xb305 > /sys/kernel/config/usb_gadget/g0/idProduct`
-
-    - `echo "***MAKE UP SERIAL NUMBER***" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber`
-
-    - `echo "Logitech, Inc." > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer`
-
-    - `echo "BT Mini-Receiver" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product`
-
-5. This starts the USB device again.
-   - `echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
-
-6. (Optional) While on the CLI I like to make some personal changes
+### 5. (Optional) While on the CLI I like to make some personal changes
    - Update the device to use local/preffered DNS `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf` 
    - Change the root password `passwd`
 
@@ -67,14 +69,10 @@ NanoKVM
 ```
 
 **Restore Default Settings**
-
-`echo 0x3346 > /sys/kernel/config/usb_gadget/g0/idVendor`
-
-`echo 0x1009 > /sys/kernel/config/usb_gadget/g0/idProduct`
-
-
-`echo "0123456789ABCDEF" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber`
-
-`echo "sipeed" > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer`
-
-`echo "NanoKVM" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product`
+```sh
+echo 0x3346 > /sys/kernel/config/usb_gadget/g0/idVendor
+echo 0x1009 > /sys/kernel/config/usb_gadget/g0/idProduct
+echo "0123456789ABCDEF" > /sys/kernel/config/usb_gadget/g0/strings/0x409/serialnumber
+echo "sipeed" > /sys/kernel/config/usb_gadget/g0/strings/0x409/manufacturer
+echo "NanoKVM" > /sys/kernel/config/usb_gadget/g0/strings/0x409/product
+```
