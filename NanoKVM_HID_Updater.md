@@ -37,7 +37,8 @@ This project is **not affiliated, associated, authorized, endorsed by, or in any
    - `echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
 
 6. (Optional) While on the CLI I like to make some personal changes
-   - `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf`
+   - Update the device to use local/preffered DNS `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf` 
+   - Change the root password `passwd`
 
 ## Default Settings
 ```
