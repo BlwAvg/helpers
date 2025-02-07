@@ -13,7 +13,7 @@ This project is intended for **educational purposes only**. The authors do not c
 This project is **not affiliated, associated, authorized, endorsed by, or in any way officially connected with Sipeed** or any of its subsidiaries or affiliates. All product and company names are trademarks of their respective holders.
 ************************************************************************************************************
 
-**NOTE:** These chhanges are lost on boot. Check the boot section for updating /etc/init.d/S03usbdev
+**NOTE:** These changes are lost on boot. Check the boot section for updating /etc/init.d/S03usbdev
 
 1. Figure out what HID information you want to use. DeviceHunt.com is great. The link pulls up the HID information for Logitech.
     - `https://devicehunt.com/view/type/usb/vendor/046D`
