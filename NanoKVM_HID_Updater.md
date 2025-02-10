@@ -39,7 +39,8 @@ echo "4340000.usb" | tee /sys/kernel/config/usb_gadget/g0/UDC`
 ```
 
 ### 5. (Optional) While on the CLI I like to make some personal changes
-   - Update the device to use local/preffered DNS `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf` 
+   - Update the device to use local/preffered DNS `echo "nameserver LOCAL_DNS_IP" > /etc/resolv.conf`
+     - To keep after reboot change this you need to update the /boot/resolv.conf file. This is called by the /etc/init.d/S02config file at boot.
    - Change the root password `passwd`
 
 ## Boot update - /etc/init.d
