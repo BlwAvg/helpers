@@ -7,7 +7,7 @@ Ways to gather intelligence pertaining to layoffs.
 
 ## 1. PS Query
 ```
-get-ADUser -LDAPFilter "(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2)(whenChanged>=20241215000000.0Z))" -Properties whenChanged, title, description | Select-Object Name, SamAccountName, whenChanged, title, description
+get-ADUser -LDAPFilter "(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2)(whenChanged>=20241215000000.0Z))" -Properties whenChanged, title, description | Select-Object Name, SamAccountName, whenChanged, title, description | Sort-Object -Property whenChanged -Descending
 ```
 **Output Example:**
 ```
@@ -38,6 +38,7 @@ description    : Please submit PRs to make this better
 | whenChanged | Date and time when the account was last modified | 
 | title | Job title of user |
 | description | Description field for the account |
+| Sort-Object -Property whenChanged -Descending | Sorts by the whenChanges date descending |
 
 ## 2. Remote Server Administration Tools
 1. Open Active Directory Users and Computers
