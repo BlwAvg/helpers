@@ -4,7 +4,7 @@
 - Defualt creds are `guacadmin`
 
 1. Docker Compose
-2. DB Initalization Script
+2. DB Initialization Script - This can nuke your DB into oblivion.
 3. Nginx Proxy Manager (NPM) advanced configuration options
 
 ## 1. Docker Compose Config
@@ -21,7 +21,7 @@ services:
       MYSQL_PASSWORD: **MYSQL_PASSWORD_HERE**
       TZ: America/**TIME_ZONE_HERE**
     volumes:
-      - **Stoage/Location/HERE**:/var/lib/mysql
+      - **Storage/Location/HERE**:/var/lib/mysql
 
   guacd:
     image: guacamole/guacd:latest
@@ -54,7 +54,7 @@ services:
 
 ## 2. DB Initialization Script
 - I store the `init-guacamole-db.sh` in my local storage for the docker container. '
-- Dont for get to add add execute permissiosn `sudo chmod +x init-guacamole-db.sh`
+- Don’t for get to add execute permissions `sudo chmod +x init-guacamole-db.sh`
 
 ```bash
 #!/bin/bash
@@ -198,7 +198,7 @@ location / {
 }
 ```
 
-full proxy - You are nerd. Why are you useing this repo?
+full proxy - You are nerd. Why are you using this repo?
 ```
 location / {
   proxy_pass http://<guacamole_ip>:9080/guacamole/;
@@ -208,4 +208,3 @@ location / {
   proxy_set_header X-Forwarded-Proto $scheme;
 }
 ```
-
