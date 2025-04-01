@@ -53,7 +53,8 @@ services:
 
 
 ## 2. DB Initialization Script
-I store the `init-guacamole-db.sh` in my local storage for the docker container. Dont for get to add add execute permissiosn `sudo chmod +x init-guacamole-db.sh`
+- I store the `init-guacamole-db.sh` in my local storage for the docker container. '
+- Dont for get to add add execute permissiosn `sudo chmod +x init-guacamole-db.sh`
 
 ```bash
 #!/bin/bash
