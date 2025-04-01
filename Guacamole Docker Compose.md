@@ -2,7 +2,11 @@
 - **I dont know what I am doing.** Use this at your own risk.
 - Dont forget to append `/guacamole` to your URL like this: `http://serverhere.com/guacamole` 
 
-## Docker Compose Config
+1. Docker Compose
+2. DB Initalization Script
+3. Nginx Proxy Manager (NPM) Redirect
+
+## 1. Docker Compose Config
 ```
 services:
   guacamole-db:
@@ -47,7 +51,7 @@ services:
 ```
 
 
-## DB Initialization Script
+## 2. DB Initialization Script
 I store the `init-guacamole-db.sh` in my local storage for the docker container. Dont for get to add add execute permissiosn `sudo chmod +x init-guacamole-db.sh`
 
 ```bash
@@ -107,4 +111,11 @@ echo "🔄 Restarting Guacamole container..."
 docker restart "$GUACAMOLE_CONTAINER"
 
 echo "✅ Guacamole DB initialization complete. Visit http://localhost:9080/guacamole"
+```
+
+## 3. NPM redirect
+```
+location = / {
+  return 301 /guacamole;
+}
 ```
