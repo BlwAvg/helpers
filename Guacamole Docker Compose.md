@@ -57,61 +57,129 @@ I store the `init-guacamole-db.sh` in my local storage for the docker container.
 
 ```bash
 #!/bin/bash
-# init-guacamole-db.sh
 
-# === CONFIGURABLE VARIABLES ===
-GUAC_VERSION="1.5.4" # If you upgrade Guacamole, change the GUAC_VERSION.
-DOWNLOAD_DIR="/tmp/guacamole-init"
+# =============================
+# Configuration Variables
+# =============================
+WORKDIR="/tmp/guac-init"
+GUAC_IMAGE="guacamole/guacamole"
 MYSQL_CONTAINER="guacamole-db"
-MYSQL_DB="guacamole_db"
-MYSQL_ROOT_PASSWORD="netlab12"
+MYSQL_ROOT_PASSWORD="**MYSQL_PASSWORD_HERE**"
+MYSQL_DATABASE="guacamole_db"
 GUACAMOLE_CONTAINER="guacamole"
 
 # =============================
-# Ensure MySQL Container Is Running
+# Helper: Ensure Container Is Running
 # =============================
-echo "🔍 Checking MySQL container status..."
+check_and_start_container() {
+  local name="$1"
+  local status
+  status=$(docker inspect -f '{{.State.Status}}' "$name" 2>/dev/null)
 
-MYSQL_STATUS=$(docker inspect -f '{{.State.Status}}' "$MYSQL_CONTAINER" 2>/dev/null)
-
-if [ "$MYSQL_STATUS" != "running" ]; then
-  echo "🚀 Starting MySQL container: $MYSQL_CONTAINER"
-  docker start "$MYSQL_CONTAINER"
-  sleep 5
-else
-  echo "✅ MySQL container is already running."
-fi
-
-# === DOWNLOAD JDBC AUTH MODULE ===
-mkdir -p "$DOWNLOAD_DIR"
-cd "$DOWNLOAD_DIR" || exit 1
-
-echo "🔽 Downloading Guacamole JDBC module version $GUAC_VERSION..."
-wget -q "https://downloads.apache.org/guacamole/${GUAC_VERSION}/binary/guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
-
-echo "📦 Extracting..."
-tar -xzf "guacamole-auth-jdbc-${GUAC_VERSION}.tar.gz"
-
-# === COPY SQL INIT SCRIPT INTO CONTAINER ===
-SCHEMA_FILE="guacamole-auth-jdbc-${GUAC_VERSION}/mysql/schema/001-create-schema.sql"
-
-if [[ ! -f "$SCHEMA_FILE" ]]; then
-    echo "❌ Could not find schema file at $SCHEMA_FILE"
+  if [ "$status" == "running" ]; then
+    echo "✅ $name is running"
+  elif [ "$status" == "exited" ] || [ "$status" == "created" ]; then
+    echo "🚀 Starting container: $name"
+    docker start "$name"
+    sleep 5
+  else
+    echo "❌ Container '$name' does not exist or failed to start"
     exit 1
+  fi
+}
+
+# =============================
+# Start Script
+# =============================
+echo "🔍 Checking container statuses..."
+check_and_start_container "$MYSQL_CONTAINER"
+check_and_start_container "$GUACAMOLE_CONTAINER"
+echo "-----------------------------------"
+echo "-----------------------------------"
+# =============================
+# Generate initdb.sql
+# =============================
+mkdir -p "$WORKDIR"
+cd "$WORKDIR" || exit 1
+
+echo "🛠 Generating schema from $GUAC_IMAGE..."
+docker run --rm "$GUAC_IMAGE" /opt/guacamole/bin/initdb.sh --mysql > "$WORKDIR/initdb.sql"
+
+if [ ! -s "$WORKDIR/initdb.sql" ]; then
+  echo "❌ Failed to generate init script"
+  exit 1
 fi
 
-echo "📁 Copying schema into MySQL container..."
-docker cp "$SCHEMA_FILE" "$MYSQL_CONTAINER:/tmp/"
+# =============================
+# Check if any tables exist
+# =============================
+echo "🔎 Checking if any tables exist in $MYSQL_DATABASE..."
+HAS_TABLES=$(docker exec -i "$MYSQL_CONTAINER" sh -c \
+  "mysql -u root -p${MYSQL_ROOT_PASSWORD} -sse \
+   'SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=\"${MYSQL_DATABASE}\";'")
 
-# === RUN INIT SCRIPT INSIDE MYSQL CONTAINER ===
-echo "⚙️ Initializing Guacamole database schema..."
-docker exec -i "$MYSQL_CONTAINER" sh -c "mysql -u root -p$MYSQL_ROOT_PASSWORD $MYSQL_DB < /tmp/001-create-schema.sql"
+if [[ "$HAS_TABLES" -gt 0 ]]; then
+  echo ""
+  echo ""
+  echo ""
+  echo "READ THIS IDIOT"
+  echo "******************************************************************"
+  echo "💣 WARNING: The database '$MYSQL_DATABASE' already contains data."
+  echo "If you continue, EVERYTHING in this database will be DESTROYED:"
+  echo "❌ ALL TABLES"
+  echo "❌ ALL DATA"
+  echo "❌ EVEN NON-GUACAMOLE TABLES"
+  echo "******************************************************************"
+  echo ""
+  read -p "⚠️  Are you SURE you want to nuke the entire database? This cannot be undone. [y/N]: " confirm
+  case "$confirm" in
+    [yY][eE][sS]|[yY])
+      echo "🔥 Nuking database '$MYSQL_DATABASE'..."
+      docker exec -i "$MYSQL_CONTAINER" sh -c \
+        "mysql -u root -p${MYSQL_ROOT_PASSWORD} -e \
+         'DROP DATABASE IF EXISTS \`${MYSQL_DATABASE}\`; CREATE DATABASE \`${MYSQL_DATABASE}\`;'"
+      ;;
+    *)
+      echo "❌ Cancelled. Database was not touched."
+      exit 0
+      ;;
+  esac
+fi
 
-# === RESTART GUACAMOLE CONTAINER ===
-echo "🔄 Restarting Guacamole container..."
+echo "-----------------------------------"
+echo "-----------------------------------"
+
+# =============================
+# Copy and Run Init SQL
+# =============================
+echo "📁 Copying init script to $MYSQL_CONTAINER..."
+docker cp "$WORKDIR/initdb.sql" "$MYSQL_CONTAINER:/tmp/initdb.sql"
+
+echo "⚙️ Initializing schema in '$MYSQL_DATABASE'..."
+docker exec -i "$MYSQL_CONTAINER" sh -c \
+  "mysql -u root -p${MYSQL_ROOT_PASSWORD} ${MYSQL_DATABASE} < /tmp/initdb.sql"
+
+if [ $? -ne 0 ]; then
+  echo "❌ Failed to execute schema SQL"
+  exit 1
+fi
+
+echo "-----------------------------------"
+echo "-----------------------------------"
+
+# =============================
+# Restart Guacamole
+# =============================
+echo "🔄 Restarting $GUACAMOLE_CONTAINER..."
 docker restart "$GUACAMOLE_CONTAINER"
 
-echo "✅ Guacamole DB initialization complete. Visit http://localhost:9080/guacamole"
+echo ""
+echo "✅ Guacamole has been initialized!"
+echo "🔐 Login at: http://<your-host>:8080/guacamole - Use the IP and port from the compose file."
+echo "   Username: guacadmin"
+echo "   Password: guacadmin"
+echo " *****CHANGE YOU DEFAULT PASSWORD*****"
+
 ```
 
 ## 3. NPM Configuration Options
