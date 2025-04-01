@@ -1,5 +1,6 @@
-#Guacamole Docker and Database Initialization
-I dont know what I am doing. Use this at your own risk.
+# Guacamole Docker and Database Initialization
+- **I dont know what I am doing.** Use this at your own risk.
+- Dont forget to append `/guacamole` to your URL like this: `http://serverhere.com/guacamole` 
 
 ## Docker Compose Config
 ```
