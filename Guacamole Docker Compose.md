@@ -1,10 +1,11 @@
 # Guacamole Docker and Database Initialization
 - **I dont know what I am doing.** Use this at your own risk.
 - Dont forget to append `/guacamole` to your URL like this: `http://serverhere.com/guacamole` 
+- Defualt creds are `guacadmin`
 
 1. Docker Compose
 2. DB Initalization Script
-3. Nginx Proxy Manager (NPM) Redirect
+3. Nginx Proxy Manager (NPM) advanced configuration options
 
 ## 1. Docker Compose Config
 ```
@@ -113,9 +114,29 @@ docker restart "$GUACAMOLE_CONTAINER"
 echo "✅ Guacamole DB initialization complete. Visit http://localhost:9080/guacamole"
 ```
 
-## 3. NPM redirect
+## 3. NPM Configuration Options
+redirect - This just works, use this.
 ```
 location = / {
   return 301 /guacamole;
 }
 ```
+
+rewrite - You want to use just use the base domain. You picky degerate.
+```
+location / {
+  rewrite ^/$ /guacamole/ redirect;
+}
+```
+
+full proxy - You are nerd. Why are you useing this repo?
+```
+location / {
+  proxy_pass http://<guacamole_ip>:9080/guacamole/;
+  proxy_set_header Host $host;
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+}
+```
+
