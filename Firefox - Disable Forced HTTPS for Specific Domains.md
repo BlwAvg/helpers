@@ -4,6 +4,8 @@
 2. From the about:config window search for `network.stricttransportsecurity.preloadlist`
 3. Change value from true to false.
 
+**NOTE: This CANNOT done in  Chrome, Chromium or MS Edge.**
+
 ---
 
 ## 🔐 What is HSTS?
