@@ -4,7 +4,7 @@
 2. From the about:config window search for `network.stricttransportsecurity.preloadlist`
 3. Change value from true to false.
 
-**NOTE: This CANNOT done in  Chrome, Chromium or MS Edge.**
+**NOTE: This CANNOT done in  Chrome, Chromium (unless you do a custom build) or MS Edge.**
 
 ---
 
