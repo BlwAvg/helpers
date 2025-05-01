@@ -1,6 +1,6 @@
 # API Commands for Nginx Proxy Manager
 
-Below is a summary of all methods defined in `frontend/js/app/api.js`, along with sample `curl` commands for each:
+Below is a summary of all methods defined in `frontend/js/app/api.js` in the [NPM Github](https://github.com/NginxProxyManager/nginx-proxy-manager/blob/develop/frontend/js/app/api.js), along with sample `curl` commands for each:
 
 ## API Methods
 
