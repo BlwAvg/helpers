@@ -70,27 +70,33 @@ Below is a summary of all methods defined in `frontend/js/app/api.js`, along wit
 ## Sample `curl` Commands
 
 ### 1) Health-check
-
 ```bash
 curl -i \
   -H "Accept: application/json" \
-  http://192.168.70.26:81/api/
+  http://NPM_IP_HERE:81/api/
 ```
-
-
 
 ### 2) Log in (get token)
 ```bash
-curl -X POST http://192.168.70.26:81/api/tokens \
+curl -X POST http://NPM_IP_HERE:81/api/tokens \
   -H "Content-Type: application/json" \
-  -d '{"identity":"admin@example.com","secret":"hunter2"}'
+  -d '{"identity":"NPM_USERNAME_HERE","secret":"NPM_PASSWORD_HERE"}'
+```
+or temporarily store your token in a variable
+```bash
+TOKEN=$(
+  curl -s -X POST 'http://NPM_IP_HERE:81/api/tokens' \
+    -H 'Content-Type: application/json' \
+    -d '{"identity":"NPM_USERNAME_HERE","secret":"NPM_PASSWORD_HERE"}' \
+  | sed -n 's/.*"token":"\([^"]*\)".*/\1/p'
+  )
 ```
 
 ### 3) Refresh token
 ```bash
 curl -H "Authorization: Bearer $TOKEN" \
      -H "Accept: application/json" \
-     http://192.168.70.26:81/api/tokens
+     http://NPM_IP_HERE:81/api/tokens
 ```
 
 
@@ -98,12 +104,12 @@ curl -H "Authorization: Bearer $TOKEN" \
 ```bash
 curl -H "Authorization: Bearer $TOKEN" \
      -H "Accept: application/json" \
-     "http://192.168.70.26:81/api/nginx/proxy-hosts?expand=owner"
+     "http://NPM_IP_HERE:81/api/nginx/proxy-hosts?expand=owner"
 ```
 
 ### 5) Create a new proxy host
 ```bash
-curl -X POST http://192.168.70.26:81/api/nginx/proxy-hosts \
+curl -X POST http://NPM_IP_HERE:81/api/nginx/proxy-hosts \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -115,8 +121,9 @@ curl -X POST http://192.168.70.26:81/api/nginx/proxy-hosts \
 ```
 
 ### 6) Renew an ACME certificate
+Update the number in the URL with the directory that has the certificate stored
 ```bash
-curl -X POST http://192.168.70.26:81/api/nginx/certificates/5/renew \
+curl -X POST http://NPM_IP_HERE:81/api/nginx/certificates/5/renew \
   -H "Authorization: Bearer $TOKEN" \
   -H "Accept: application/json"
 ```
