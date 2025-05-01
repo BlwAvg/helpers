@@ -3,6 +3,9 @@
 Below is a summary of all methods defined in `frontend/js/app/api.js`, along with sample `curl` commands for each:
 [NPM Official Github](https://github.com/NginxProxyManager/nginx-proxy-manager/blob/develop/frontend/js/app/api.js)
 
+This is also an awesome reference
+https://github.com/Erreur32/nginx-proxy-manager-Bash-API?tab=readme-ov-file#reference-api
+
 ## API Methods
 
 | Category                  | Function                           | HTTP Method | Endpoint                                               | Description                                    |
