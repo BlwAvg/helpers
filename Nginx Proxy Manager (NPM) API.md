@@ -69,28 +69,40 @@ Below is a summary of all methods defined in `frontend/js/app/api.js`, along wit
 
 ## Sample `curl` Commands
 
+### 1) Health-check
+
 ```bash
-# 1) Health-check
 curl -i \
   -H "Accept: application/json" \
   http://192.168.70.26:81/api/
+```
 
-# 2) Log in (get token)
+
+
+### 2) Log in (get token)
+```bash
 curl -X POST http://192.168.70.26:81/api/tokens \
   -H "Content-Type: application/json" \
   -d '{"identity":"admin@example.com","secret":"hunter2"}'
+```
 
-# 3) Refresh token
+### 3) Refresh token
+```bash
 curl -H "Authorization: Bearer $TOKEN" \
      -H "Accept: application/json" \
      http://192.168.70.26:81/api/tokens
+```
 
-# 4) List all proxy hosts
+
+### 4) List all proxy hosts
+```bash
 curl -H "Authorization: Bearer $TOKEN" \
      -H "Accept: application/json" \
      "http://192.168.70.26:81/api/nginx/proxy-hosts?expand=owner"
+```
 
-# 5) Create a new proxy host
+### 5) Create a new proxy host
+```bash
 curl -X POST http://192.168.70.26:81/api/nginx/proxy-hosts \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -100,8 +112,11 @@ curl -X POST http://192.168.70.26:81/api/nginx/proxy-hosts \
         "forward_port":8080,
         "ssl":{ "certificate_id":2 }
       }'
+```
 
-# 6) Renew an ACME certificate
+### 6) Renew an ACME certificate
+```bash
 curl -X POST http://192.168.70.26:81/api/nginx/certificates/5/renew \
   -H "Authorization: Bearer $TOKEN" \
   -H "Accept: application/json"
+```
