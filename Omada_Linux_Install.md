@@ -5,6 +5,7 @@ Omada was a pain to install. This is what I did to get it working.
 ## Omada Install
 
 Refer to [this guide](https://www.tp-link.com/us/support/faq/3272/).
+
 Use for Omada v5.15.20.20 +
 
 ---
