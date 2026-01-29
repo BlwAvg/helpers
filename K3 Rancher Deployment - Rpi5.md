@@ -1,14 +1,15 @@
 # K3s + Rancher + MetalLB on Raspberry Pi 5 (Compute Modules)
 
 This guide walks through installing **K3s**, **Rancher**, **cert-manager**, and **MetalLB** on **Raspberry Pi 5 Compute Modules** running Ubuntu.
-NOTE: I HAVE NOT VERIFIED ALL THESE STEPS. This may not fully work. This took me forever to figure out and may have missed or forgotten something.
+
+**NOTE: I HAVE NOT VERIFIED ALL THESE STEPS. This may not fully work. This took me forever to figure out and may have missed or forgotten something.**
 
 The result:
 
 * A working K3s cluster on RPis
 * Rancher installed and reachable on **standard HTTPS (443)**
 * MetalLB providing a real LAN IP for ingress
-* TLS via **cert-manager + DNS-01 (Cloudflare)**
+* TLS via **cert-manager + DNS-01 (via Cloudflare)**
 
 This guide assumes a homelab / LAN environment.
 
