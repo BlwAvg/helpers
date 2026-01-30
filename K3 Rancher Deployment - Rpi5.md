@@ -114,6 +114,11 @@ kubectl get nodes
 
 ### Join additional nodes (agents or servers)
 
+On the main node get the token:
+```bash
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+
 On other nodes:
 
 ```bash
