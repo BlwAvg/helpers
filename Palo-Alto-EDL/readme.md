@@ -56,6 +56,16 @@ Palo Alto devices poll EDLs at a minimum interval of 5 minutes. Configure cron t
 */5 * * * * /opt/pan-edl-list/list-updater.sh >> /var/log/palo_edl_update.log 2>&1
 ```
 
+NOTE: This is what the logs look like.
+```
+tail /var/log/palo_edl_update.log 
+2026-02-16 15:15:01 - Run started
+2026-02-16 15:15:01 - Added: 10.10.2.20
+2026-02-16 15:15:01 - Added: 127.0.0.1
+2026-02-16 15:15:01 - Added: 1.1.1.1
+2026-02-16 15:15:01 - Added: 224.223.0.1
+```
+
 ---
 
 ## Step 4: Host the EDL File
