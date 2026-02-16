@@ -14,3 +14,4 @@ Bash script that:
   `/opt/pan-edl-list/palo-edl01.txt`
 - Processes only new log entries (state-tracked)
 - Designed to run five minutes via cron
+- Proves a sysmtemd service to run a terrible webserver. 
