@@ -12,8 +12,8 @@ Configure your Palo Alto firewall to send syslog entries for the authentication 
 
 Example filters:
 
-* `eventid eq auth-fail`
-* `status eq failure`
+* `(eventid eq auth-fail)`
+* `(status eq failure)`
 
 Adjust the filter as needed for your environment.
 
