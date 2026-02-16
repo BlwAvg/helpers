@@ -14,4 +14,7 @@ Bash script that:
   `/opt/pan-edl-list/palo-edl01.txt`
 - Processes only new log entries (state-tracked)
 - Designed to run five minutes via cron `*/5 * * * * /opt/pan-edl-list/list-updater.sh >> /var/log/palo_edl_update.log 2>&1`
-- Proves a sysmtemd service to run a terrible webserver. If you use this production, you are an idiot.
+- Proves a sysmtemd service to run a terrible webserver.
+- Access the EDL via `http://YOUR-SERVER-IP:8080/palo-edl01.txt`
+
+If you use this production, you are an idiot
