@@ -4,7 +4,7 @@
 # */5 * * * * /opt/pan-edl-list/list-updater.sh >> /var/log/palo_edl_update.log 2>&1
 
 # sudo systemctl daemon-reload
-# sudo systemctl enable --now txtserver.service
+# sudo systemctl enable --now pan-edl-www.service
 
 # make sure you have permissions setup correctly....
 
